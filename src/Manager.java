@@ -1,9 +1,9 @@
 
 public class Manager extends User {
 
-	protected String employeeID;
-	protected int age;
-	protected String password;
+	private String employeeID;
+	private int age;
+	private String password;
 	
 	public Manager(String name, String employeeID, int age, String password) {
 		super(name);

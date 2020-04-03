@@ -1,10 +1,10 @@
 
 public class AccountHolder extends User {
 
-	protected String username;
-	protected String password;
-	protected int age;
-	protected String paymentInfo;
+	private String username;
+	private String password;
+	private int age;
+	private String paymentInfo;
 	private ArrayList<Show> savedShows;
 	private ArrayList<Theater> savedTheaters;
 	
@@ -16,11 +16,11 @@ public class AccountHolder extends User {
 		this.paymentInfo = paymentInfo;
 	}
 	
-	public void rateShow(int rating) {
+	public void rateShow(Show show, int rating) {
 		
 	}
 	
-	public void rateTheater(int rating) {
+	public void rateTheater(Theater theater, int rating) {
 		
 	}
 	

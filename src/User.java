@@ -5,6 +5,7 @@ public class User {
 	protected boolean isHandicap;
 	protected double discount;
 	protected ArrayList<Ticket> tickets;
+	protected ArrayList<Refreshment> refreshments;
 	
 	public User(String name) {
 		this.name = name;
