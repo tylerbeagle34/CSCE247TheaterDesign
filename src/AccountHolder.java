@@ -24,7 +24,7 @@ public class AccountHolder extends User {
 		
 	}
 	
-	public void rentTheater() {
+	public void rentTheater(Theater theater) {
 		
 	}
 	
