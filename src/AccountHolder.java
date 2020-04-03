@@ -5,6 +5,8 @@ public class AccountHolder extends User {
 	protected String password;
 	protected int age;
 	protected String paymentInfo;
+	private ArrayList<Show> savedShows;
+	private ArrayList<Theater> savedTheaters;
 	
 	public AccountHolder(String name, String username, String password, int age, String paymentInfo) {
 		super(name);
