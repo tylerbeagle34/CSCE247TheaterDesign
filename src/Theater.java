@@ -5,17 +5,17 @@ public class Theater {
 	private ArrayList<Play> plays = new ArrayList<Play>();
 	private ArrayList<Movie> movies = new ArrayList<Movie>();
 	private ArrayList<Concert> concerts = new ArrayList<Concert>();
-	private ArrayList<Refresment> refresments = new ArrayList<Refreshment>();
+	private ArrayList<Refreshment> refreshments = new ArrayList<Refreshment>();
 	private char[][] layout = new char [50][50];
 	private String name;
 	private int theaters;
 	
 	public Theater(String name, int theaters, ArrayList <Play> plays, ArrayList <Movie> movies,
-					ArrayList <Concert> concerts, ArrayList <Refresment> refresmnets, char[][]layout){
+					ArrayList <Concert> concerts, ArrayList <Refreshment> refreshments, char[][]layout){
 		this.movies = movies;
 		this.concerts = concerts;
 		this.plays = plays;
-		this.refresments = refresments;
+		this.refreshments = refreshments;
 		this.layout = layout;
 		this.name = name;
 		this.theaters = theaters;				
