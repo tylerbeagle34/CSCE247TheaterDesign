@@ -23,10 +23,10 @@ public class Refreshment {
 	
 	/**
 	 * Constructs a Refreshment object.
-	 * @param name				The name of the Refreshment.
+	 * @param name			The name of the Refreshment.
 	 * @param description		A description of the Refreshment.
 	 * @param nutritionalInfo	The nutritional information of the refreshment.
-	 * @param price				The price of the refreshment.
+	 * @param price			The price of the refreshment.
 	 */
 	public Refreshment(String name, String description, String nutritionalInfo, double price) {
 		this.name = name;
