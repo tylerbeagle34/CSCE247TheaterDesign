@@ -9,6 +9,6 @@ public class Ticket {
 	}
 	
 	public String toString() {
-		return("The ticket to " + show.getName() + " costs $" + price);
+		return "The ticket to " + show.getName() + " costs $" + price;
 	}
 }
