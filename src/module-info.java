@@ -1,2 +1,0 @@
-module CSCE247TheaterDesign {
-}
