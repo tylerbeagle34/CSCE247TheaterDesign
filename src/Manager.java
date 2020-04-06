@@ -1,26 +1,21 @@
 
 public class Manager extends User {
 
-	private String employeeID;
-	private int age;
-	private String password;
+	protected String empID;
+	protected int age;
+	protected String password;
+	protected Theater theater;
 	
-	public Manager(String name, String employeeID, int age, String password) {
-		super(name);
-		this.employeeID = employeeID;
+	public Manager(String name, String type, String empID, int age, String password, Theater theater) {
+		super(name, type);
+		this.empID = empID;
+		this.age = age;
 		this.password = password;
+		this.theater = theater;
 	}
 	
-	public void addShow(Show show) {
-		
-	}
-	
-	public void removeShow(Show show) {
-		
-	}
-	
-	public void editShow(Show show) {
-		
+	public String toString() {
+		return super.toString() + "\tEmployee ID: " + empID;
 	}
 	
 }

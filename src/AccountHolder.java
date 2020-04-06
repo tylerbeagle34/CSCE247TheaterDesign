@@ -1,4 +1,4 @@
-import java.util.*;
+
 public class AccountHolder extends User {
 
 	protected String username;
@@ -8,39 +8,19 @@ public class AccountHolder extends User {
 	protected boolean isHandicap;
 	protected String attribute;
 	protected double discount;
-	protected ArrayList<Show> savedShows;
-	protected ArrayList<Theater> savedTheaters;
 	
-	public AccountHolder(String name, String username, String password, int age, String paymentInfo, boolean isHandicap, String attribute) {
-		super(name);
+	public AccountHolder(String name, String type, String username, String password, int age, String paymentInfo, boolean isHandicap, String attribute) {
+		super(name, type);
 		this.username = username;
 		this.password = password;
 		this.age = age;
 		this.paymentInfo = paymentInfo;
 		this.isHandicap = isHandicap;
 		setDiscount(attribute);
-		savedShows = new ArrayList<Show>();
-		savedTheaters = new ArrayList<savedTheaters>();
 	}
 	
-	public void rateShow(Show show, int rating, String comment) {
-		
-	}
-	
-	public void rateTheater(Theater theater, int rating) {
-		
-	}
-	
-	public void rentTheater(Theater theater) {
-		
-	}
-	
-	public void saveShow(Show show) {
-		
-	}
-	
-	public void saveTheater(Theater theater) {
-		
+	public String toString() {
+		return super.toString() + "\tUsername: " + username;
 	}
 	
 	private void setDiscount(String attribute) {
