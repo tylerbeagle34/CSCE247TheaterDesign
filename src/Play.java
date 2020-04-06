@@ -13,5 +13,5 @@ public class Play extends Show {
 		this.time = time;
 		this.type = "play";
 	}	
-	super();
+
 }
