@@ -1,14 +1,8 @@
 /**
-<<<<<<< HEAD
- * 
- * This class will generate and store information for users who create an account.
- *
-=======
  * AccountHolder Class that extends User
  * Each account holder is a user and has the user name and user type
  * Creates an account holder based upon attributes
  * @author Warren Beagle
->>>>>>> 56e7a9fac3afe845dd99768336e49082a3a57917
  */
 public class AccountHolder extends User {
 
@@ -55,7 +49,6 @@ public class AccountHolder extends User {
 	/**
 	 * @return Sets the discount of the account holder based on special attribute
 	 * @param attribute of the account holder
->>>>>>> 56e7a9fac3afe845dd99768336e49082a3a57917
 	 */
 	private void setDiscount(String attribute) {
 		if(attribute.equalsIgnoreCase("teacher")) {
