@@ -7,11 +7,11 @@ public class Ticket {
 	/**
 	 * The Show the Ticket is for.
 	 */
-	private Show show;
+	protected Show show;
 	/**
 	 * The price of the Ticket.
 	 */
-	private double price;
+	protected double price;
 	
 	/**
 	 * Constructs a Ticket object.

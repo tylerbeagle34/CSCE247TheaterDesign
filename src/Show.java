@@ -1,4 +1,4 @@
-
+import java.util.*;
 public abstract class Show {
 	protected String name;
 	protected String description;
@@ -9,6 +9,7 @@ public abstract class Show {
 	protected String ratingMPAA;
 	protected double time;
 	protected String type;
+	protected ArrayList<Review> reviews;
 	
 	
 	public String getName() {

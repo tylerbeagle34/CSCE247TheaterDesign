@@ -7,19 +7,19 @@ public class Refreshment {
 	/**
 	 * The name of the refreshment.
 	 */
-	private String name;
+	protected String name;
 	/**
 	 * A description of the refreshment.
 	 */
-	private String description;
+	protected String description;
 	/**
 	 * The nutritional information of the refreshment.
 	 */
-	private String nutritionalInfo;
+	protected String nutritionalInfo;
 	/**
 	 * The price of the refreshment.
 	 */
-	private double price;
+	protected double price;
 	
 	/**
 	 * Constructs a Refreshment object.
