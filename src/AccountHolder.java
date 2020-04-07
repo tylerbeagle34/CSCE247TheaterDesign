@@ -1,10 +1,21 @@
 /**
+<<<<<<< HEAD
  * 
  * This class will generate and store information for users who create an account.
  *
+=======
+ * AccountHolder Class that extends User
+ * Each account holder is a user and has the user name and user type
+ * Creates an account holder based upon attributes
+ * @author Warren Beagle
+>>>>>>> 56e7a9fac3afe845dd99768336e49082a3a57917
  */
 public class AccountHolder extends User {
 
+	/**
+	 * Protected attributes that can be accessed by the class
+	 * Attributes uniquely describe account holders
+	 */
 	protected String username;
 	protected String password;
 	protected int age;
@@ -14,15 +25,15 @@ public class AccountHolder extends User {
 	protected double discount;
 	
 	/**
-	 * 
-	 * @param name
-	 * @param type
-	 * @param username
-	 * @param password
-	 * @param age
-	 * @param paymentInfo
-	 * @param isHandicap  checks to see if the user is handicaped in order for seating 
-	 * @param attribute   checks to see if the user falls under any circumstances which qualify them for a discount
+	 * Constructor to create an account holder
+	 * @param name of the user
+	 * @param type of user
+	 * @param username of the account holder
+	 * @param password of the account holder
+	 * @param age of the account holder
+	 * @param paymentInfo of the account holder
+	 * @param isHandicap; is the account holder handicap
+	 * @param attribute; special attributes of the account holder
 	 */
 	public AccountHolder(String name, String type, String username, String password, int age, String paymentInfo, boolean isHandicap, String attribute) {
 		super(name, type);
@@ -34,13 +45,17 @@ public class AccountHolder extends User {
 		setDiscount(attribute);
 	}
 	
+	/**
+	 * To string method to print account holder attributes
+	 */
 	public String toString() {
 		return super.toString() + "\tUsername: " + username;
 	}
+	
 	/**
-	 * 
-	 * @param attribute
-	 * @return sets the discount for the user given the attribute
+	 * @return Sets the discount of the account holder based on special attribute
+	 * @param attribute of the account holder
+>>>>>>> 56e7a9fac3afe845dd99768336e49082a3a57917
 	 */
 	private void setDiscount(String attribute) {
 		if(attribute.equalsIgnoreCase("teacher")) {

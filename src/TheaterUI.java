@@ -1,7 +1,16 @@
-import java.io.PrintWriter;
+/**
+ * TheaterUI class to create the user interface for the theater system
+ * Incorporates the functionality of the system similar to a ticketing system
+ * Imports java.io and java.util to use print writer, scanner, and array list
+ * @author Team Leaking Memory
+ */
+import java.io.*;
 import java.util.*;
 public class TheaterUI {
 
+	/**
+	 * Private instance variables to be accessed throughout the UI
+	 */
 	private static final String WELCOME_MESSAGE = "********** Welcome to the Leaking Memory Ticket System **********";
 	private static final String CLOSING_MESSAGE = "********** Thank you for using the Leaking Memory Ticket System! Have a nice day! **********";
 	private static final String LOGIN_MESSAGE = "********** Logging In **********";
@@ -25,6 +34,10 @@ public class TheaterUI {
 	private ArrayList<Concert> concerts;
 	private ArrayList<Refreshment> refreshments;
 	
+	/**
+	 * TheaterUI constructor
+	 * Creates a new theater UI
+	 */
 	public TheaterUI() {
 		scanner = new Scanner(System.in);
 		user = new User("Guest", "guest");
@@ -39,6 +52,9 @@ public class TheaterUI {
 		refreshments = new ArrayList<Refreshment>();
 	}
 	
+	/**
+	 * Method to load data into the system
+	 */
 	private void loadData() {
 		Theater movieTheater = new Theater("Columbia Movie Theater", 10);
 		Theater playsRUs = new Theater("PlaysRUs", 2);
@@ -62,6 +78,10 @@ public class TheaterUI {
 		users.add(employee);
 	}
 	
+	/**
+	 * Main user interface
+	 * Run when the user is a guest
+	 */
 	public void runMain() {
 		loadData();
 		boolean isRunning = true;
@@ -94,6 +114,10 @@ public class TheaterUI {
 		System.out.println(CLOSING_MESSAGE);
 	}
 	
+	/**
+	 * Account user interface
+	 * Runs when the user is an account holder
+	 */
 	public void runAccount() {
 		boolean isAccount = true;
 		while(isAccount) {
@@ -126,6 +150,10 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Manager user interface
+	 * Runs when the user is a manager
+	 */
 	public void runManager() {
 		boolean isRunning = true;
 		while(isRunning) {
@@ -152,6 +180,10 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Method to display the main menu given the user type
+	 * @param type of user
+	 */
 	private void displayMainMenu(String type) {
 		System.out.println("\n************ " + type + " Main Menu *************");
 		if(user.type.equalsIgnoreCase("account")) {
@@ -170,6 +202,9 @@ public class TheaterUI {
 		System.out.println("\n");
 	}
 	
+	/**
+	 * Prints the shows based on user input
+	 */
 	private void viewShows() {
 		System.out.println("Do you want to view MOVIES, PLAYS, CONCERTS, or ALL SHOWS");
 		scanner.nextLine();
@@ -188,6 +223,10 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Prints all shows
+	 * Checks if there are shows
+	 */
 	private void printAllShows() {
 		if(!checkShows()) {
 			return;
@@ -199,6 +238,10 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Prints only movies
+	 * Checks if there are movies
+	 */
 	private void printMovies() {
 		if(!checkMovies()) {
 			return;
@@ -210,6 +253,10 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Prints only plays
+	 * Checks if there are plays
+	 */
 	private void printPlays() {
 		if(!checkPlays()) {
 			return;
@@ -221,6 +268,10 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Prints only concerts
+	 * Checks if there are concerts
+	 */
 	private void printConcerts() {
 		if(!checkConcerts()) {
 			return;
@@ -232,6 +283,12 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Allows users and account holders to buy tickets
+	 * Checks if there are shows to purchase
+	 * Checks to make sure the show exists
+	 * Allows users to purchase multiple tickets and choose options
+	 */
 	private void buyTickets() {
 		if(!checkShows()) {
 			return;
@@ -295,6 +352,10 @@ public class TheaterUI {
 		System.out.println("Sorry we couldn't find that show");
 	}
 	
+	/**
+	 * Checks whether the array list of shows is empty
+	 * @return true or false based on if the array list is not empty
+	 */
 	private boolean checkShows() {
 		if(shows.size() == 0) {
 			System.out.println("There are no shows at this time");
@@ -303,6 +364,10 @@ public class TheaterUI {
 		return true;
 	}
 	
+	/**
+	 * Checks whether the array list of movies is empty
+	 * @return true or false based on if the array list is not empty
+	 */
 	private boolean checkMovies() {
 		if(movies.size() == 0) {
 			System.out.println("There are no movies at this time");
@@ -311,6 +376,10 @@ public class TheaterUI {
 		return true;
 	}
 	
+	/**
+	 * Checks whether the array list of plays is empty
+	 * @return true or false based on if the array list is not empty
+	 */
 	private boolean checkPlays() {
 		if(plays.size() == 0) {
 			System.out.println("There are no plays at this time");
@@ -319,6 +388,10 @@ public class TheaterUI {
 		return true;
 	}
 	
+	/**
+	 * Checks whether the array list of concerts is empty
+	 * @return true or false based on if the array list is not empty
+	 */
 	private boolean checkConcerts() {
 		if(concerts.size() == 0) {
 			System.out.println("There are no concerts at this time");
@@ -327,6 +400,11 @@ public class TheaterUI {
 		return true;
 	}
 	
+	/**
+	 * Allows users and account holders to buy refreshments
+	 * Checks if there are refreshments to purchase
+	 * Checks to make sure the refreshment exists
+	 */
 	private void buyRefreshments() {
 		if(!checkRefreshments()) {
 			return;
@@ -345,6 +423,10 @@ public class TheaterUI {
 		System.out.println("Sorry we couldn't find that refreshment");
 	}
 	
+	/**
+	 * Prints all refreshments
+	 * Checks if there are refreshments available
+	 */
 	private void printAllRefreshments() {
 		if(!checkRefreshments()) {
 			return;
@@ -355,6 +437,10 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Checks if there are refreshments for purchase
+	 * @return true or false based on whether the array list is not empty
+	 */
 	private boolean checkRefreshments() {
 		if(refreshments.size() == 0) {
 			System.out.println("There are no refreshments at this time");
@@ -363,6 +449,11 @@ public class TheaterUI {
 		return true;
 	}
 	
+	/**
+	 * Allows users to write a review of a show
+	 * Checks to see if there are shows to review
+	 * Checks whether the show exists
+	 */
 	private void writeReview() {
 		if(!checkShows()) {
 			return;
@@ -389,6 +480,11 @@ public class TheaterUI {
 		System.out.println("Sorry we couldn't find that show");
 	}
 	
+	/**
+	 * Prints the reviews of a show
+	 * Checks whether the show exists
+	 * Checks whether there are reviews for the show
+	 */
 	private void displayReviews() {
 		System.out.println("Enter the name of the show you want to read about");
 		printAllShows();
@@ -410,6 +506,11 @@ public class TheaterUI {
 		System.out.println("Sorry we couldn't find that show");
 	}
 	
+	/**
+	 * Allows guests to create an account
+	 * Enter all the attributes of an account holder
+	 * Moves to log in when an account is created
+	 */
 	private void createAccount() {
 		System.out.println("Enter your name");
 		scanner.nextLine();
@@ -445,6 +546,10 @@ public class TheaterUI {
 		login();
 	}
 	
+	/**
+	 * Allows current managers and account holders to log in
+	 * Checks whether the manager or account exists
+	 */
 	private void login() {
 		System.out.println(LOGIN_MESSAGE);
 		System.out.println("Are you an employee? (Y or N)");
@@ -483,11 +588,19 @@ public class TheaterUI {
 		System.out.println("Invalid username or password");
 	}
 	
+	/**
+	 * Logs users out if they are logged in
+	 */
 	private void logout() {
 		System.out.println(user.name+ " has logged out");
 		user = new User("Guest", "guest");
 	}
 	
+	/**
+	 * Allows managers to add shows to their theater
+	 * Enter all the attributes of a show
+	 * Creates a play, concert, or movie based on input show type
+	 */
 	private void addShow() {
 		System.out.println("Enter the theater with this show");
 		scanner.nextLine();
@@ -496,12 +609,6 @@ public class TheaterUI {
 			if(theater.name.equalsIgnoreCase(newTheater)) {
 				System.out.println("Enter the name of the show to add");
 				String newShow = scanner.nextLine();
-				for(Show show : shows) {
-					if(show.name.equalsIgnoreCase(newShow)) {
-						System.out.println("This show is already available");
-						return;
-					}
-				}
 				System.out.println("Enter a description of the show");
 				String des = scanner.nextLine();
 				System.out.println("Enter the genre of the show");
@@ -544,6 +651,10 @@ public class TheaterUI {
 		System.out.println("That theater does not exist");
 	}
 	
+	/**
+	 * Allows managers to remove shows with a certain name
+	 * Checks whether the show exists
+	 */
 	private void removeShow() {
 		System.out.println("Enter the name of the show you want to remove");
 		printAllShows();
@@ -558,6 +669,11 @@ public class TheaterUI {
 		System.out.println("Sorry we couldn't find that show");
 	}
 	
+	/**
+	 * Allows managers to add refreshments
+	 * Enter all the attributes of a refreshment
+	 * Checks whether the refreshment already exists
+	 */
 	private void addRefreshment() {
 		System.out.println("Enter the name of the refreshment to add");
 		scanner.nextLine();
@@ -578,6 +694,10 @@ public class TheaterUI {
 		System.out.println(newRef + " was successfully added to the menu");
 	}
 	
+	/**
+	 * Allows managers to remove refreshments
+	 * Checks whether the refreshment exists
+	 */
 	private void removeRefreshment() {
 		System.out.println("Enter the refreshment you want to remove");
 		for(Refreshment refreshment : refreshments) {
@@ -594,6 +714,10 @@ public class TheaterUI {
 		System.out.println("Sorry we couldn't find that refreshment");
 	}
 	
+	/**
+	 * Prints the tickets purchased by a user to a text file
+	 * @param tickets to be printed
+	 */
 	public void printTickets(Ticket[] tickets) {
 		System.out.println("Your " + tickets.length + " tickets for " + tickets[0].show.name + " have been printed successfully");
 		try {
@@ -607,6 +731,10 @@ public class TheaterUI {
 		}
 	}
 	
+	/**
+	 * Prints the tickets purchased by a user to the screen
+	 * @param tickets to be printed
+	 */
 	public void loadTickets(Ticket[] tickets) {
 		System.out.println("Here are your " + tickets.length + " tickets for " + tickets[0].show.name + "\n");
 		for(int i = 0; i < tickets.length; i++) {
