@@ -1,12 +1,17 @@
 import java.io.PrintWriter;
 import java.util.*;
-public class TheaterSystem {
+public class TheaterUI {
 
 	private static final String WELCOME_MESSAGE = "********** Welcome to the Leaking Memory Ticket System **********";
 	private static final String CLOSING_MESSAGE = "********** Thank you for using the Leaking Memory Ticket System! Have a nice day! **********";
 	private static final String LOGIN_MESSAGE = "********** Logging In **********";
-	private String[] guestMenuOptions = {"Buy Tickets","Create Account","Login","Read Reviews","Exit"};
-	private String[] accountMenuOptions = {"Buy Tickets","Buy Refreshments","Write a Review","Read Reviews","Logout"};
+	private static final String SHOWS_MESSAGE = "********** SHOWS **********";
+	private static final String MOVIES_MESSAGE = "********** MOVIES **********";
+	private static final String PLAYS_MESSAGE = "********** PLAYS **********";
+	private static final String CONCERTS_MESSAGE = "********** CONCERTS **********";
+	private static final String REFRESHMENTS_MESSAGE = "********** REFRESHMENTS **********";
+	private String[] guestMenuOptions = {"View Shows", "Buy Tickets","Create Account","Login","Read Reviews","Exit"};
+	private String[] accountMenuOptions = {"View Shows", "Buy Tickets","View Refreshments","Buy Refreshments","Write a Review","Read Reviews","Logout"};
 	private String[] managerMenuOptions = {"Add Show","Remove Show","Add Refreshment","Remove Refreshment","Logout"};
 	private Scanner scanner;
 	private User user;
@@ -20,7 +25,7 @@ public class TheaterSystem {
 	private ArrayList<Concert> concerts;
 	private ArrayList<Refreshment> refreshments;
 	
-	public TheaterSystem() {
+	public TheaterUI() {
 		scanner = new Scanner(System.in);
 		user = new User("Guest", "guest");
 		users = new ArrayList<User>();
@@ -65,17 +70,20 @@ public class TheaterSystem {
 			displayMainMenu(user.type.toUpperCase());
 			int userCommand = scanner.nextInt();
 			switch(userCommand) {
-				case(1):
-					buyTickets();
+				case(1): 
+					viewShows();
 					break;
 				case(2):
-					createAccount();
+					buyTickets();
 					break;
 				case(3):
+					createAccount();
+					break;
+				case(4):
 					scanner.nextLine();
 					login();
 					break;
-				case(4):
+				case(5):
 					displayReviews();
 					break;
 				default: 
@@ -92,16 +100,22 @@ public class TheaterSystem {
 			displayMainMenu(user.type.toUpperCase());
 			int userCommand = scanner.nextInt();
 			switch(userCommand) {
-				case(1):
-					buyTickets();
+				case(1): 
+					viewShows();
 					break;
 				case(2):
-					buyRefreshments();
+					buyTickets();
 					break;
 				case(3):
-					writeReview();
+					buyRefreshments();
 					break;
 				case(4):
+					printAllRefreshments();
+					break;
+				case(5):
+					writeReview();
+					break;
+				case(6):
 					displayReviews();
 					break;
 				default:
@@ -156,12 +170,74 @@ public class TheaterSystem {
 		System.out.println("\n");
 	}
 	
+	private void viewShows() {
+		System.out.println("Do you want to view MOVIES, PLAYS, CONCERTS, or ALL SHOWS");
+		scanner.nextLine();
+		String input = scanner.nextLine();
+		if(input.equalsIgnoreCase("movies")) {
+			printMovies();
+		} else if(input.equalsIgnoreCase("plays")) {
+			printPlays();
+		} else if(input.equalsIgnoreCase("concerts")) {
+			printConcerts();
+		} else if(input.equalsIgnoreCase("all shows")) {
+			printAllShows();
+		} else {
+			System.out.println("Invalid Input. Printing All Shows");
+			printAllShows();
+		}
+	}
+	
+	private void printAllShows() {
+		if(!checkShows()) {
+			return;
+		}
+		System.out.println(SHOWS_MESSAGE);
+		for(Show show : shows) {
+			System.out.println(show.toString());
+			System.out.println("Tickets Remaining: " + show.numTickets);
+		}
+	}
+	
+	private void printMovies() {
+		if(!checkMovies()) {
+			return;
+		}
+		System.out.println(MOVIES_MESSAGE);
+		for(Movie movie : movies) {
+			System.out.println(movie.toString());
+			System.out.println("Tickets Remaining: " + movie.numTickets);
+		}
+	}
+	
+	private void printPlays() {
+		if(!checkPlays()) {
+			return;
+		}
+		System.out.println(PLAYS_MESSAGE);
+		for(Play play : plays) {
+			System.out.println(play.toString());
+			System.out.println("Tickets Remaining: " + play.numTickets);
+		}
+	}
+	
+	private void printConcerts() {
+		if(!checkConcerts()) {
+			return;
+		}
+		System.out.println(CONCERTS_MESSAGE);
+		for(Concert concert : concerts) {
+			System.out.println(concert.toString());
+			System.out.println("Tickets Remaining: " + concert.numTickets);
+		}
+	}
+	
 	private void buyTickets() {
 		if(!checkShows()) {
 			return;
 		}
 		System.out.println("Enter the name of the show you would like to buy tickets to");
-		printShows();
+		printAllShows();
 		scanner.nextLine();
 		String input = scanner.nextLine();
 		for(Show show : shows) {
@@ -219,16 +295,33 @@ public class TheaterSystem {
 		System.out.println("Sorry we couldn't find that show");
 	}
 	
-	private void printShows() {
-		for(Show show : shows) {
-			System.out.println(show.toString());
-			System.out.println("Tickets Remaining: " + show.numTickets);
-		}
-	}
-	
 	private boolean checkShows() {
 		if(shows.size() == 0) {
 			System.out.println("There are no shows at this time");
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean checkMovies() {
+		if(movies.size() == 0) {
+			System.out.println("There are no movies at this time");
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean checkPlays() {
+		if(plays.size() == 0) {
+			System.out.println("There are no plays at this time");
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean checkConcerts() {
+		if(concerts.size() == 0) {
+			System.out.println("There are no concerts at this time");
 			return false;
 		}
 		return true;
@@ -239,7 +332,7 @@ public class TheaterSystem {
 			return;
 		}
 		System.out.println("Enter the name of the refreshment you would like to buy");
-		printRefreshments();
+		printAllRefreshments();
 		scanner.nextLine();
 		String input = scanner.nextLine();
 		for(Refreshment refreshment : refreshments) {
@@ -252,7 +345,11 @@ public class TheaterSystem {
 		System.out.println("Sorry we couldn't find that refreshment");
 	}
 	
-	private void printRefreshments() {
+	private void printAllRefreshments() {
+		if(!checkRefreshments()) {
+			return;
+		}
+		System.out.println(REFRESHMENTS_MESSAGE);
 		for(Refreshment refreshment : refreshments) {
 			System.out.println(refreshment.toString());
 		}
@@ -271,7 +368,7 @@ public class TheaterSystem {
 			return;
 		}
 		System.out.println("Enter the name of the show you would like review");
-		printShows();
+		printAllShows();
 		scanner.nextLine();
 		String input = scanner.nextLine();
 		for(Show show : shows) {
@@ -294,7 +391,7 @@ public class TheaterSystem {
 	
 	private void displayReviews() {
 		System.out.println("Enter the name of the show you want to read about");
-		printShows();
+		printAllShows();
 		scanner.nextLine();
 		String input = scanner.nextLine();
 		for(Show show : shows) {
@@ -449,7 +546,7 @@ public class TheaterSystem {
 	
 	private void removeShow() {
 		System.out.println("Enter the name of the show you want to remove");
-		printShows();
+		printAllShows();
 		scanner.nextLine();
 		String input = scanner.nextLine();
 		for(Show show : shows) {

@@ -16,6 +16,7 @@ public abstract class Show {
 	protected int[][] seats;
 	protected int[][] chosenSeats;
 	protected ArrayList<Review> reviews;
+	private static final String SEATING_MESSAGE = "********** SCREEN / STAGE **********";
 	
 	public Show(Theater theater, String name, String description, String genre, double price, 
 			double length, String ratingMPAA, String time, String type, int rows, int cols) {
@@ -39,6 +40,7 @@ public abstract class Show {
 	
 	public void printSeats() {
 		int seatNum = 1;
+		System.out.println(SEATING_MESSAGE);
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < cols; j++) {
 				if(chosenSeats[i][j] == 0) {
