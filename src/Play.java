@@ -1,6 +1,22 @@
 import java.util.ArrayList;
 
 public class Play extends Show {
+	/**
+	 * 
+	 * @param theater
+	 * @param name
+	 * @param description
+	 * @param genre
+	 * @param price
+	 * @param length
+	 * @param ratingMPAA = rating from G to NC-17
+	 * @param time
+	 * @param type
+	 * @param rows
+	 * @param cols
+	 * 
+	 * @return The class will create a play object
+	 */
 	
 	public Play(Theater theater, String name, String description, String genre, double price, 
 			double length, String ratingMPAA, String time, String type, int rows, int cols) {

@@ -1,3 +1,7 @@
+
+/**
+ * This is a super call Show in which Movie, Concert, and Play will all inherit from
+ */
 import java.util.*;
 public abstract class Show {
 	
@@ -18,6 +22,20 @@ public abstract class Show {
 	protected ArrayList<Review> reviews;
 	private static final String SEATING_MESSAGE = "********** SCREEN / STAGE **********";
 	
+	/**
+	 * 
+	 * @param theater: Theater object
+	 * @param name
+	 * @param description
+	 * @param genre
+	 * @param price
+	 * @param length
+	 * @param ratingMPAA: Rating of the movie from G to NC-17
+	 * @param time: Start time of the movie
+	 * @param type
+	 * @param rows
+	 * @param cols
+	 */
 	public Show(Theater theater, String name, String description, String genre, double price, 
 			double length, String ratingMPAA, String time, String type, int rows, int cols) {
 		this.theater = theater;
@@ -38,6 +56,9 @@ public abstract class Show {
 		reviews = new ArrayList<Review>();
 	}
 	
+	/**
+	 * @return Prints the array of seats to choose from
+	 */
 	public void printSeats() {
 		int seatNum = 1;
 		System.out.println(SEATING_MESSAGE);

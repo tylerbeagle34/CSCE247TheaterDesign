@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * This class will generate and store information for users who create an account.
+ *
+ */
 public class AccountHolder extends User {
 
 	protected String username;
@@ -9,6 +13,17 @@ public class AccountHolder extends User {
 	protected String attribute;
 	protected double discount;
 	
+	/**
+	 * 
+	 * @param name
+	 * @param type
+	 * @param username
+	 * @param password
+	 * @param age
+	 * @param paymentInfo
+	 * @param isHandicap  checks to see if the user is handicaped in order for seating 
+	 * @param attribute   checks to see if the user falls under any circumstances which qualify them for a discount
+	 */
 	public AccountHolder(String name, String type, String username, String password, int age, String paymentInfo, boolean isHandicap, String attribute) {
 		super(name, type);
 		this.username = username;
@@ -22,7 +37,11 @@ public class AccountHolder extends User {
 	public String toString() {
 		return super.toString() + "\tUsername: " + username;
 	}
-	
+	/**
+	 * 
+	 * @param attribute
+	 * @return sets the discount for the user given the attribute
+	 */
 	private void setDiscount(String attribute) {
 		if(attribute.equalsIgnoreCase("teacher")) {
 			this.discount = 0.2;
