@@ -1,16 +1,62 @@
 import java.util.*;
 public abstract class Show {
+	
+	protected Theater theater;
 	protected String name;
 	protected String description;
 	protected String genre;
-	protected double viewerRating;
 	protected double price;
 	protected double length;
 	protected String ratingMPAA;
 	protected double time;
 	protected String type;
+	protected int rows;
+	protected int cols;
+	protected int numTickets;
+	protected int[][] seats;
+	protected int[][] chosenSeats;
 	protected ArrayList<Review> reviews;
 	
+	public Show(Theater theater, String name, String description, String genre, double price, 
+			double length, String ratingMPAA, double time, String type, int rows, int cols) {
+		this.theater = theater;
+		this.name = name;
+		this.genre = genre;
+		this.price = price;
+		this.length = length;
+		this.ratingMPAA = ratingMPAA;
+		this.rows = rows;
+		this.cols = cols;
+		numTickets = rows * cols;
+		seats = new int[rows][cols];
+		chosenSeats = new int[rows][cols];
+		initChosenSeats();
+		reviews = new ArrayList<Review>();
+	}
+	
+	public void printSeats() {
+		int seatNum = 1;
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				if(chosenSeats[i][j] == 0) {
+					seats[i][j] = 0;
+				} else {
+					seats[i][j] = seatNum;
+				}
+				System.out.print(seats[i][j] + " | ");
+				seatNum++;
+			}
+			System.out.println();
+		}
+	}
+	
+	public void initChosenSeats() {
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				chosenSeats[i][j] = 1;
+			}
+		}
+	}
 	
 	public String getName() {
 		return name;
@@ -20,9 +66,6 @@ public abstract class Show {
 	}
 	public String getGenre() {
 		return genre;
-	}
-	public double getViewerRating() {
-		return viewerRating;
 	}
 	public double getPrice() {
 		return price;
@@ -39,9 +82,8 @@ public abstract class Show {
 
 	@Override
 	public String toString() {
-		return "Here is the information for your upcoming" + type +"! name =" + name + ", description =" + description + ", genre =" + genre + ", viewerRating ="
-				+ viewerRating + ", price =" + price + ", length =" + length + ", ratingMPAA =" + ratingMPAA + ", time ="
-				+ time;
-	}	
+		return "\nShow Name: " + name + "\nDescription: " + description + "\nGenre: " + genre + 
+				"\nPrice: " + price + "\nRating: " + ratingMPAA + "\nTime: " + length + "\nType: " + type + "\nTheater: " + theater.name;
+	}
 	
 }

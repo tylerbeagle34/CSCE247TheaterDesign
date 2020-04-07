@@ -14,6 +14,9 @@ public class TheaterSystem {
 	private ArrayList<Manager> managers;
 	private ArrayList<AccountHolder> accounts;
 	private ArrayList<Show> shows;
+	private ArrayList<Movie> movies;
+	private ArrayList<Play> plays;
+	private ArrayList<Concert> concerts;
 	private ArrayList<Refreshment> refreshments;
 	
 	public TheaterSystem() {
@@ -23,15 +26,20 @@ public class TheaterSystem {
 		managers = new ArrayList<Manager>();
 		accounts = new ArrayList<AccountHolder>();
 		shows = new ArrayList<Show>();
+		movies = new ArrayList<Movie>();
+		plays = new ArrayList<Play>();
+		concerts = new ArrayList<Concert>();
 		refreshments = new ArrayList<Refreshment>();
 	}
 	
 	private void loadData() {
-		Theater movieTheater = new Theater("Columbia Movie Theater");
-		Theater playTheater = new Theater("Columbia Play Theater");
-		Theater concertVenue = new Theater("Columbia Concert Venue");
-		Show frozen2 = new Show(movieTheater, "Frozen 2", "Kids", 8.00, "1200", "PG", 10, 10);
-		Show jungleBook = new Show(movieTheater, "The Jungle Book", "Family", 8.00, "1430", "PG", 8, 8);
+		Theater movieTheater = new Theater("Columbia Movie Theater", 10);
+		Theater playTheater = new Theater("PlaysRUs", 2);
+		Theater concertVenue = new Theater("Colonial Life Arena", 1);
+		Movie frozen2 = new Movie(movieTheater, "Frozen 2", "Family friendly disney movie about the snow queen Elsa", "Kids", 8.00, 122, "PG", 1200, "movie", 10, 10);
+		Movie jungleBook = new Movie(movieTheater, "The Jungle Book", "Remake of the Disney Original", "Family", 8.00, 118, "PG", 1330, "movie", 8, 8);
+		movies.add(frozen2);
+		movies.add(jungleBook);
 		shows.add(frozen2);
 		shows.add(jungleBook);
 		
