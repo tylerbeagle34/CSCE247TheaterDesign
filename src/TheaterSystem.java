@@ -13,6 +13,7 @@ public class TheaterSystem {
 	private ArrayList<User> users;
 	private ArrayList<Manager> managers;
 	private ArrayList<AccountHolder> accounts;
+	private ArrayList<Theater> theaters;
 	private ArrayList<Show> shows;
 	private ArrayList<Movie> movies;
 	private ArrayList<Play> plays;
@@ -25,6 +26,7 @@ public class TheaterSystem {
 		users = new ArrayList<User>();
 		managers = new ArrayList<Manager>();
 		accounts = new ArrayList<AccountHolder>();
+		theaters = new ArrayList<Theater>();
 		shows = new ArrayList<Show>();
 		movies = new ArrayList<Movie>();
 		plays = new ArrayList<Play>();
@@ -34,10 +36,13 @@ public class TheaterSystem {
 	
 	private void loadData() {
 		Theater movieTheater = new Theater("Columbia Movie Theater", 10);
-		Theater playTheater = new Theater("PlaysRUs", 2);
+		Theater playsRUs = new Theater("PlaysRUs", 2);
 		Theater concertVenue = new Theater("Colonial Life Arena", 1);
-		Movie frozen2 = new Movie(movieTheater, "Frozen 2", "Family friendly disney movie about the snow queen Elsa", "Kids", 8.00, 122, "PG", 1200, "movie", 10, 10);
-		Movie jungleBook = new Movie(movieTheater, "The Jungle Book", "Remake of the Disney Original", "Family", 8.00, 118, "PG", 1330, "movie", 8, 8);
+		theaters.add(movieTheater);
+		theaters.add(playsRUs);
+		theaters.add(concertVenue);
+		Movie frozen2 = new Movie(movieTheater, "Frozen 2", "Family friendly disney movie about the snow queen Elsa", "Kids", 8.00, 122, "PG", "1200", "movie", 10, 10);
+		Movie jungleBook = new Movie(movieTheater, "The Jungle Book", "Remake of the Disney Original", "Family", 8.00, 118, "PG", "1330", "movie", 8, 8);
 		movies.add(frozen2);
 		movies.add(jungleBook);
 		shows.add(frozen2);
@@ -47,7 +52,7 @@ public class TheaterSystem {
 		accounts.add(existing);
 		users.add(existing);
 		
-		Manager employee = new Manager("Playhouse Manager", "manager", "12345", 30, "manager", playTheater);
+		Manager employee = new Manager("Playhouse Manager", "manager", "12345", 30, "manager", playsRUs);
 		managers.add(employee);
 		users.add(employee);
 	}
@@ -189,7 +194,7 @@ public class TheaterSystem {
 							}
 						}
 					}
-					Ticket purTix = new Ticket(show, user, seat);
+					Ticket purTix = new Ticket(show, user, show.price, seat);
 					tickets[i] = purTix;
 					user.tickets.add(purTix);
 					show.numTickets--;
@@ -387,7 +392,59 @@ public class TheaterSystem {
 	}
 	
 	private void addShow() {
-		
+		System.out.println("Enter the theater with this show");
+		scanner.nextLine();
+		String newTheater = scanner.nextLine();
+		for(Theater theater : theaters) {
+			if(theater.name.equalsIgnoreCase(newTheater)) {
+				System.out.println("Enter the name of the show to add");
+				String newShow = scanner.nextLine();
+				for(Show show : shows) {
+					if(show.name.equalsIgnoreCase(newShow)) {
+						System.out.println("This show is already available");
+						return;
+					}
+				}
+				System.out.println("Enter a description of the show");
+				String des = scanner.nextLine();
+				System.out.println("Enter the genre of the show");
+				String gen = scanner.nextLine();
+				System.out.println("How much does a ticket to this show cost");
+				double newPri = scanner.nextDouble();
+				System.out.println("How long does this show last");
+				double newLen = scanner.nextDouble();
+				System.out.println("What is the show's MPAA rating");
+				scanner.nextLine();
+				String newRat = scanner.nextLine();
+				System.out.println("What time is this show");
+				String newTime = scanner.nextLine();
+				System.out.println("Is this show a MOVIE, CONCERT, or PLAY");
+				String newType = scanner.nextLine().toUpperCase();
+				System.out.println("How many rows of seats will this show have");
+				int newRows = scanner.nextInt();
+				System.out.println("How many columns of seats will this show have");
+				int newCols = scanner.nextInt();
+				if(newType.equalsIgnoreCase("movie")) {
+					Movie newMovie = new Movie(theater, newShow, des, gen, newPri, newLen, newRat, newTime, newType, newRows, newCols);
+					movies.add(newMovie);
+					shows.add(newMovie);
+				} else if(newType.equalsIgnoreCase("play")) {
+					Play newPlay = new Play(theater, newShow, des, gen, newPri, newLen, newRat, newTime, newType, newRows, newCols);
+					plays.add(newPlay);
+					shows.add(newPlay);
+				} else if(newType.equalsIgnoreCase("concert")) {
+					Concert newConcert = new Concert(theater, newShow, des, gen, newPri, newLen, newRat, newTime, newType, newRows, newCols);
+					concerts.add(newConcert);
+					shows.add(newConcert);
+				} else {
+					System.out.println("Invalid show type");
+					return;
+				}
+				System.out.println(newShow + " was successfully added to the menu");
+				return;
+			}
+		}
+		System.out.println("That theater does not exist");
 	}
 	
 	private void removeShow() {

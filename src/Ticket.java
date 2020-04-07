@@ -13,14 +13,19 @@ public class Ticket {
 	 */
 	protected double price;
 	
+	protected User user;
+	protected int seatNum;
+	
 	/**
 	 * Constructs a Ticket object.
 	 * @param show	The show the Ticket is for.
 	 * @param price	The price of the Ticket.
 	 */
-	public Ticket(Show show, double price) {
+	public Ticket(Show show, User user, double price, int seatNum) {
 		this.show = show;
 		this.price = price;
+		this.user = user;
+		this.seatNum = seatNum;
 	}
 	
 	/**
@@ -30,4 +35,16 @@ public class Ticket {
 	public String toString() {
 		return "The ticket to " + show.getName() + " costs $" + price;
 	}
+	
+	public String ticketOutput() {
+		return "**************************************************" + 
+				"\n**************************************************" +
+				"\n\n" + show.type + " TICKET" +
+				"\n\n" + show.name + "\nPrice: " + show.price + "\nTime:" + show.time +
+				"\nSeat: " + seatNum +
+				"\n" + user.toString() + "\n" +
+				"\n**************************************************" +
+				"\n**************************************************\n\n";
+	}
+	
 }

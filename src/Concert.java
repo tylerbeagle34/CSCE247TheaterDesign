@@ -1,15 +1,15 @@
+import java.util.ArrayList;
 
 public class Concert extends Show {
-	public Concert(String name, String description, String genre, String ratingMPAA, double viewerRating, double price, 
-			double length, double time){
-		this.name = name;
-		this.description = description;
-		this.genre = genre;
-		this.ratingMPAA = ratingMPAA;
-		this.viewerRating = viewerRating;
-		this.price = price;
-		this.length = length;
-		this.time = time;
-		this.type = "concert";
-	}	
+	
+	public Concert(Theater theater, String name, String description, String genre, double price, 
+			double length, String ratingMPAA, String time, String type, int rows, int cols) {
+		super(theater, name, description, genre, price, length, ratingMPAA, time, type, rows, cols);
+		numTickets = rows * cols;
+		seats = new int[rows][cols];
+		chosenSeats = new int[rows][cols];
+		initChosenSeats();
+		reviews = new ArrayList<Review>();
+	}
+	
 }

@@ -8,7 +8,7 @@ public abstract class Show {
 	protected double price;
 	protected double length;
 	protected String ratingMPAA;
-	protected double time;
+	protected String time;
 	protected String type;
 	protected int rows;
 	protected int cols;
@@ -18,13 +18,16 @@ public abstract class Show {
 	protected ArrayList<Review> reviews;
 	
 	public Show(Theater theater, String name, String description, String genre, double price, 
-			double length, String ratingMPAA, double time, String type, int rows, int cols) {
+			double length, String ratingMPAA, String time, String type, int rows, int cols) {
 		this.theater = theater;
 		this.name = name;
+		this.description = description;
 		this.genre = genre;
 		this.price = price;
 		this.length = length;
 		this.ratingMPAA = ratingMPAA;
+		this.time = time;
+		this.type = type.toUpperCase();
 		this.rows = rows;
 		this.cols = cols;
 		numTickets = rows * cols;
@@ -76,14 +79,14 @@ public abstract class Show {
 	public String getRatingMPAA() {
 		return ratingMPAA;
 	}
-	public double getTime() {
+	public String getTime() {
 		return time;
 	}
 
 	@Override
 	public String toString() {
 		return "\nShow Name: " + name + "\nDescription: " + description + "\nGenre: " + genre + 
-				"\nPrice: " + price + "\nRating: " + ratingMPAA + "\nTime: " + length + "\nType: " + type + "\nTheater: " + theater.name;
+				"\nPrice: $" + price + "\nRating: " + ratingMPAA + "\nTime: " + length + "\nType: " + type + "\nTheater: " + theater.name;
 	}
 	
 }
