@@ -36,6 +36,10 @@ public class Ticket {
 		return "The ticket to " + show.getName() + " costs $" + price;
 	}
 	
+	/**
+	 * Method to set the ticket output to be printed or loaded
+	 * @return the string of the ticket to either be printed or loaded
+	 */
 	public String ticketOutput() {
 		return "**************************************************" + 
 				"\n**************************************************" +

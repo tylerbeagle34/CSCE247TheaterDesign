@@ -1,6 +1,15 @@
-
+/**
+ * AccountHolder Class that extends User
+ * Each account holder is a user and has the user name and user type
+ * Creates an account holder based upon attributes
+ * @author Warren Beagle
+ */
 public class AccountHolder extends User {
 
+	/**
+	 * Protected attributes that can be accessed by the class
+	 * Attributes uniquely describe account holders
+	 */
 	protected String username;
 	protected String password;
 	protected int age;
@@ -9,6 +18,17 @@ public class AccountHolder extends User {
 	protected String attribute;
 	protected double discount;
 	
+	/**
+	 * Constructor to create an account holder
+	 * @param name of the user
+	 * @param type of user
+	 * @param username of the account holder
+	 * @param password of the account holder
+	 * @param age of the account holder
+	 * @param paymentInfo of the account holder
+	 * @param isHandicap; is the account holder handicap
+	 * @param attribute; special attributes of the account holder
+	 */
 	public AccountHolder(String name, String type, String username, String password, int age, String paymentInfo, boolean isHandicap, String attribute) {
 		super(name, type);
 		this.username = username;
@@ -19,10 +39,17 @@ public class AccountHolder extends User {
 		setDiscount(attribute);
 	}
 	
+	/**
+	 * To string method to print account holder attributes
+	 */
 	public String toString() {
 		return super.toString() + "\tUsername: " + username;
 	}
 	
+	/**
+	 * Sets the discount of the account holder based on special attribute
+	 * @param attribute of the account holder
+	 */
 	private void setDiscount(String attribute) {
 		if(attribute.equalsIgnoreCase("teacher")) {
 			this.discount = 0.2;
