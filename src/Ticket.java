@@ -12,14 +12,21 @@ public class Ticket {
 	 * The price of the Ticket.
 	 */
 	protected double price;
-	
+	/**
+	 * The current user.
+	 */
 	protected User user;
+	/**
+	 * The seat number the ticket is tied to.
+	 */
 	protected int seatNum;
 	
 	/**
 	 * Constructs a Ticket object.
-	 * @param show	The show the Ticket is for.
-	 * @param price	The price of the Ticket.
+	 * @param show		The show the Ticket is for.
+	 * @param user		The user who is ordering the ticket.
+	 * @param price		The price of the Ticket.
+	 * @param seatNum	The seat number of the ticket.
 	 */
 	public Ticket(Show show, User user, double price, int seatNum) {
 		this.show = show;
