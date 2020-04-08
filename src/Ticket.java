@@ -1,7 +1,7 @@
 
 /**
  * Defines a Ticket object and holds the object's information.
- * @author Nicholas Mims
+ * @author Garrison Davis, Nicholas Mims, Tyler Beagle
  */
 public class Ticket {
 	/**
