@@ -8,7 +8,40 @@ class TheaterUITest {
 	User user = new User("User", "User");
 	Theater theater = new Theater("Theater", 1);
 	Show show = new Movie(theater, "Name", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 10, 10);
+	
+	@Test
+	public void testValidAddRefreshment() {
+		assertEquals(true, theaterUI.addRefreshment());
+	}
+	
+	@Test
+	public void testAddRefreshmentAlreadyAvailable() {
+		theaterUI.refreshments.add(new Refreshment("Popcorn", "Buttered Popcorn", "Unhealthy", 5.0));
+		assertEquals(false, theaterUI.addRefreshment());
+	}
+	
+	@Test
+	public void testAddRefreshmentPriceLessThanZero() {
+		assertEquals(false, theaterUI.addRefreshment());
+	}
 
+	@Test
+	public void testValidRemoveRefreshment() {
+		theaterUI.refreshments.add(new Refreshment("Popcorn", "Buttered Popcorn", "Unhealthy", 5.0));
+		assertEquals(true, theaterUI.removeRefreshment());
+	}
+	
+	@Test
+	public void testInvalidRemoveRefreshment() {
+		theaterUI.refreshments.add(new Refreshment("Popcorn", "Buttered Popcorn", "Unhealthy", 5.0));
+		assertEquals(false, theaterUI.removeRefreshment());
+	}
+	
+	@Test
+	public void testRemoveRefreshmentWithNoRefreshments() {
+		assertEquals(false, theaterUI.removeRefreshment());
+	}
+	
 	@Test
 	public void testPrintSingleTicket() {
 		Ticket[] tickets = new Ticket[1];

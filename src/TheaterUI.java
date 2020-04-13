@@ -32,7 +32,7 @@ public class TheaterUI {
 	private ArrayList<Movie> movies;
 	private ArrayList<Play> plays;
 	private ArrayList<Concert> concerts;
-	private ArrayList<Refreshment> refreshments;
+	protected ArrayList<Refreshment> refreshments;
 	
 	/**
 	 * TheaterUI constructor
@@ -674,14 +674,14 @@ public class TheaterUI {
 	 * Enter all the attributes of a refreshment
 	 * Checks whether the refreshment already exists
 	 */
-	private void addRefreshment() {
+	public boolean addRefreshment() {
 		System.out.println("Enter the name of the refreshment to add");
 		scanner.nextLine();
 		String newRef = scanner.nextLine().toUpperCase();
 		for(Refreshment refreshment : refreshments) {
 			if(refreshment.name.equalsIgnoreCase(newRef)) {
-				System.out.println("This refreshment is already available");
-				return;
+				System.out.println(refreshment.name.toUpperCase() + " is already available");
+				return false;
 			}
 		}
 		System.out.println("Enter a description of the refreshment");
@@ -690,15 +690,23 @@ public class TheaterUI {
 		String nI = scanner.nextLine();
 		System.out.println("How much does this refreshment cost");
 		double newPrice = scanner.nextDouble();
+		if(newPrice < 0.0) {
+			System.out.println("Price must be greater than $0");
+			return false;
+		}
 		refreshments.add(new Refreshment(newRef, des, nI, newPrice));
-		System.out.println(newRef + " was successfully added to the menu");
+		System.out.println(newRef.toUpperCase() + " was successfully added to the menu");
+		return true;
 	}
 	
 	/**
 	 * Allows managers to remove refreshments
 	 * Checks whether the refreshment exists
 	 */
-	private void removeRefreshment() {
+	public boolean removeRefreshment() {
+		if(!checkRefreshments()) {
+			return false;
+		}
 		System.out.println("Enter the refreshment you want to remove");
 		for(Refreshment refreshment : refreshments) {
 			System.out.println(refreshment.toString());
@@ -708,10 +716,12 @@ public class TheaterUI {
 		for(Refreshment refreshment : refreshments) {
 			if(refreshment.name.equalsIgnoreCase(input)) {
 				refreshments.remove(refreshment);
-				return;
+				System.out.println(refreshment.name.toUpperCase() + " was successfully removed");
+				return true;
 			}
 		}
-		System.out.println("Sorry we couldn't find that refreshment");
+		System.out.println("Sorry we couldn't find " + input.toUpperCase() + " in the refreshments");
+		return false;
 	}
 	
 	/**
