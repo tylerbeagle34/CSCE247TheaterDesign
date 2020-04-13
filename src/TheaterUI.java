@@ -718,28 +718,42 @@ public class TheaterUI {
 	 * Prints the tickets purchased by a user to a text file
 	 * @param tickets to be printed
 	 */
-	public void printTickets(Ticket[] tickets) {
+	public int printTickets(Ticket[] tickets) {
+		int ticketsPrinted = 0;
+		if(tickets == null) {
+			ticketsPrinted = -1;
+			return ticketsPrinted;
+		}
 		System.out.println("Your " + tickets.length + " tickets for " + tickets[0].show.name + " have been printed successfully");
 		try {
 			PrintWriter printTix = new PrintWriter("Printed Tickets", "UTF-8");
 			for(int i = 0; i < tickets.length; i++) {
 				printTix.print(tickets[i].ticketOutput());
+				ticketsPrinted++;
 			}
 			printTix.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return ticketsPrinted;
 	}
 	
 	/**
 	 * Prints the tickets purchased by a user to the screen
 	 * @param tickets to be printed
 	 */
-	public void loadTickets(Ticket[] tickets) {
+	public int loadTickets(Ticket[] tickets) {
+		int ticketsLoaded = 0;
+		if(tickets == null) {
+			ticketsLoaded = -1;
+			return ticketsLoaded;
+		}
 		System.out.println("Here are your " + tickets.length + " tickets for " + tickets[0].show.name + "\n");
 		for(int i = 0; i < tickets.length; i++) {
 			System.out.println(tickets[i].ticketOutput() + "\n");
+			ticketsLoaded++;
 		}
+		return ticketsLoaded;
 	}
 
 }
