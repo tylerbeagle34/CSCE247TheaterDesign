@@ -8,35 +8,31 @@ import org.junit.jupiter.api.Test;
 
 class UserTest {
 
-	User user;
+	Theater theater = new Theater("Theater", 1);
+	User user = new User("User", "Type");
+	User managerUser = new User(new Manager("Manager", "Manager", "EmpID", 21, "Password", theater));
+	User accountUser = new User(new AccountHolder("AccountHolder", "Account", "Username", "Password", 21, "PaymentInfo", false, "Attribute"));
 	
 	@Test
 	public void testConstructUser() {
-		user = new User("User", "User");
 		assertEquals("User", user.name);
-		assertEquals("User", user.type);
+		assertEquals("Type", user.type);
 	}
 	
 	@Test
 	public void testConstructUserFromManager() {
-		Theater theater = new Theater("Theater", 1);
-		Manager manager = new Manager("Manager", "Manager", "EmpID", 21, "Password", theater);
-		user = new User(manager);
-		assertEquals("Manager", user.name);
-		assertEquals("Manager", user.type);
+		assertEquals("Manager", managerUser.name);
+		assertEquals("Manager", managerUser.type);
 	}
 	
 	@Test
 	public void testConstructUserFromAccountHolder() {
-		AccountHolder account = new AccountHolder("AccountHolder", "Account", "Username", "Password", 21, "PaymentInfo", false, "Attribute");
-		user = new User(account);
-		assertEquals("AccountHolder", user.name);
-		assertEquals("Account", user.type);
+		assertEquals("AccountHolder", accountUser.name);
+		assertEquals("Account", accountUser.type);
 	}
 	
 	@Test
 	public void testUserToString() {
-		user = new User("Name", "Type");
 		assertEquals("\nUser Name: " + user.name, user.toString());
 	}
 
