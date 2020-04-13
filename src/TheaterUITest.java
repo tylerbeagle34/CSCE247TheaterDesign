@@ -10,6 +10,48 @@ class TheaterUITest {
 	Show show = new Movie(theater, "Name", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 10, 10);
 	
 	@Test
+	public void testAddShowMovie() {
+		assertEquals(true, theaterUI.addShow());
+	}
+	
+	@Test
+	public void testAddShowPlay() {
+		assertEquals(true, theaterUI.addShow());
+	}
+	
+	@Test
+	public void testAddShowConcert() {
+		assertEquals(true, theaterUI.addShow());
+	}
+	
+	@Test
+	public void testAddShowInvalidType() {
+		assertEquals(false, theaterUI.addShow());
+	}
+	
+	@Test
+	public void testAddShowInvalidTheater() {
+		assertEquals(false, theaterUI.addShow());
+	}
+	
+	@Test
+	public void testValidRemoveShow() {
+		theaterUI.shows.add(new Movie(theater, "Name", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 10, 10));
+		assertEquals(true, theaterUI.removeShow());
+	}
+	
+	@Test
+	public void testInvalidRemoveShow() {
+		theaterUI.shows.add(new Movie(theater, "Name", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 10, 10));
+		assertEquals(false, theaterUI.removeShow());
+	}
+	
+	@Test
+	public void testRemoveShowWithNoShows() {
+		assertEquals(false, theaterUI.removeShow());
+	}
+	
+	@Test
 	public void testValidAddRefreshment() {
 		assertEquals(true, theaterUI.addRefreshment());
 	}

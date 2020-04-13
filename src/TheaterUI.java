@@ -28,7 +28,7 @@ public class TheaterUI {
 	private ArrayList<Manager> managers;
 	private ArrayList<AccountHolder> accounts;
 	private ArrayList<Theater> theaters;
-	private ArrayList<Show> shows;
+	protected ArrayList<Show> shows;
 	private ArrayList<Movie> movies;
 	private ArrayList<Play> plays;
 	private ArrayList<Concert> concerts;
@@ -601,7 +601,7 @@ public class TheaterUI {
 	 * Enter all the attributes of a show
 	 * Creates a play, concert, or movie based on input show type
 	 */
-	private void addShow() {
+	public boolean addShow() {
 		System.out.println("Enter the theater with this show");
 		scanner.nextLine();
 		String newTheater = scanner.nextLine();
@@ -641,21 +641,25 @@ public class TheaterUI {
 					concerts.add(newConcert);
 					shows.add(newConcert);
 				} else {
-					System.out.println("Invalid show type");
-					return;
+					System.out.println("Invalid show type. Show not added");
+					return false;
 				}
-				System.out.println(newShow + " was successfully added to the menu");
-				return;
+				System.out.println(newShow.toUpperCase() + " was successfully added");
+				return true;
 			}
 		}
 		System.out.println("That theater does not exist");
+		return false;
 	}
 	
 	/**
 	 * Allows managers to remove shows with a certain name
 	 * Checks whether the show exists
 	 */
-	private void removeShow() {
+	public boolean removeShow() {
+		if(!checkShows()) {
+			return false;
+		}
 		System.out.println("Enter the name of the show you want to remove");
 		printAllShows();
 		scanner.nextLine();
@@ -663,10 +667,11 @@ public class TheaterUI {
 		for(Show show : shows) {
 			if(show.name.equalsIgnoreCase(input)) {
 				shows.remove(show);
-				return;
+				return true;
 			}
 		}
-		System.out.println("Sorry we couldn't find that show");
+		System.out.println("Sorry we couldn't find " + input.toUpperCase());
+		return false;
 	}
 	
 	/**
@@ -691,7 +696,7 @@ public class TheaterUI {
 		System.out.println("How much does this refreshment cost");
 		double newPrice = scanner.nextDouble();
 		if(newPrice < 0.0) {
-			System.out.println("Price must be greater than $0");
+			System.out.println("Price must be greater than or equal to $0");
 			return false;
 		}
 		refreshments.add(new Refreshment(newRef, des, nI, newPrice));
