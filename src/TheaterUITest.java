@@ -45,11 +45,6 @@ class TheaterUITest {
 	}
 	
 	@Test
-	public void testLogin() {
-		
-	}
-	
-	@Test
 	public void testLogout() {
 		assertEquals(true, theaterUI.logout());
 	}
