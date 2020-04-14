@@ -1,4 +1,3 @@
-
 /**
  * Defines a Ticket object and holds the object's information.
  * @author Garrison Davis, Nicholas Mims, Tyler Beagle
