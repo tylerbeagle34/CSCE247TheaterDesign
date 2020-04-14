@@ -35,6 +35,11 @@ class TheaterUITest {
 	}
 	
 	@Test
+	public void testAddShowPriceLessThanZero() {
+		assertEquals(false, theaterUI.addShow());
+	}
+	
+	@Test
 	public void testValidRemoveShow() {
 		theaterUI.shows.add(new Movie(theater, "Name", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 10, 10));
 		assertEquals(true, theaterUI.removeShow());

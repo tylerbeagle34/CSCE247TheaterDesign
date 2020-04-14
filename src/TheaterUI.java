@@ -615,6 +615,10 @@ public class TheaterUI {
 				String gen = scanner.nextLine();
 				System.out.println("How much does a ticket to this show cost");
 				double newPri = scanner.nextDouble();
+				if(newPri < 0) {
+					System.out.println("Price must be greater than or equal to 0");
+					return false;
+				}
 				System.out.println("How long does this show last");
 				double newLen = scanner.nextDouble();
 				System.out.println("What is the show's MPAA rating");
