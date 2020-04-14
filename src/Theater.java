@@ -30,7 +30,7 @@ public class Theater {
 	}
 	
 	public String toString() {
-		return "\nTheater Name: " + name;
+		return "\nVenue: " + name + " has " + theaters + " theaters.";
 	}
 	
 }

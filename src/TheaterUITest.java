@@ -54,6 +54,8 @@ class TheaterUITest {
 		assertEquals(true, theaterUI.logout());
 	}
 	
+
+
 	@Test
 	public void testAddShowMovie() {
 		theaterUI.theaters.add(theater);
@@ -185,5 +187,5 @@ class TheaterUITest {
 		Ticket[] tickets = null;
 		assertEquals(-1, theaterUI.loadTickets(tickets));
 	}
-
+	
 }
