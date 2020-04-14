@@ -40,7 +40,6 @@ public class Refreshment {
 	 * @return the Refreshment object in String format
 	 */
 	public String toString() {
-		return "A(n) " + name + " costs $" + price + ", is a(n) " + description +
-				" and its nutritional information follows: " + nutritionalInfo;
+		return "\nName: " + name.toUpperCase() + "\nDescription: " + description + "\nNutritional Facts: " + nutritionalInfo + "\nPrice: $" + price;
 	}
 }
