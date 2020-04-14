@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 class UserTest {
 
 	Theater theater = new Theater("Theater", 1);
-	User user = new User("User", "Type");
-	User managerUser = new User(new Manager("Manager", "Manager", "EmpID", 21, "Password", theater));
-	User accountUser = new User(new AccountHolder("AccountHolder", "Account", "Username", "Password", 21, "PaymentInfo", false, "Attribute"));
+	User user = new User("User");
+	User managerUser = new User(new Manager("Manager", "EmpID", 21, "Password", theater));
+	User accountUser = new User(new AccountHolder("AccountHolder", "Username", "Password", 21, "PaymentInfo", false, "Attribute"));
 	
 	@Test
 	public void testConstructUser() {

@@ -29,9 +29,9 @@ public class TheaterUI {
 	private ArrayList<AccountHolder> accounts;
 	private ArrayList<Theater> theaters;
 	protected ArrayList<Show> shows;
-	private ArrayList<Movie> movies;
-	private ArrayList<Play> plays;
-	private ArrayList<Concert> concerts;
+	protected ArrayList<Movie> movies;
+	protected ArrayList<Play> plays;
+	protected ArrayList<Concert> concerts;
 	protected ArrayList<Refreshment> refreshments;
 	
 	/**
@@ -40,7 +40,7 @@ public class TheaterUI {
 	 */
 	public TheaterUI() {
 		scanner = new Scanner(System.in);
-		user = new User("Guest", "guest");
+		user = new User("Guest");
 		users = new ArrayList<User>();
 		managers = new ArrayList<Manager>();
 		accounts = new ArrayList<AccountHolder>();
@@ -69,11 +69,11 @@ public class TheaterUI {
 		shows.add(frozen2);
 		shows.add(jungleBook);
 		
-		AccountHolder existing = new AccountHolder("Exisiting User", "account", "existing", "existing", 21, "Cash", false, "student");
+		AccountHolder existing = new AccountHolder("Exisiting User", "existing", "existing", 21, "Cash", false, "student");
 		accounts.add(existing);
 		users.add(existing);
 		
-		Manager employee = new Manager("Playhouse Manager", "manager", "12345", 30, "manager", playsRUs);
+		Manager employee = new Manager("Playhouse Manager", "12345", 30, "manager", playsRUs);
 		managers.add(employee);
 		users.add(employee);
 	}
@@ -540,7 +540,7 @@ public class TheaterUI {
 			System.out.println("Invalid attribute type. Defulted to none");
 			payment = "none";
 		}
-		AccountHolder newAccount = new AccountHolder(name, "account", username, password, age, payment, isHandicap, attribute);
+		AccountHolder newAccount = new AccountHolder(name, username, password, age, payment, isHandicap, attribute);
 		accounts.add(newAccount);
 		users.add(newAccount);
 		login();
@@ -591,9 +591,14 @@ public class TheaterUI {
 	/**
 	 * Logs users out if they are logged in
 	 */
-	private void logout() {
+	public boolean logout() {
+		if(user.type.equalsIgnoreCase("guest")) {
+			System.out.println("You are not signed in");
+			return false;
+		}
 		System.out.println(user.name+ " has logged out");
-		user = new User("Guest", "guest");
+		user = new User("Guest");
+		return true;
 	}
 	
 	/**
@@ -602,6 +607,10 @@ public class TheaterUI {
 	 * Creates a play, concert, or movie based on input show type
 	 */
 	public boolean addShow() {
+		if(user.type.equalsIgnoreCase("guest") || user.type.equalsIgnoreCase("account")) {
+			System.out.println("Only managers can add shows");
+			return false;
+		}
 		System.out.println("Enter the theater with this show");
 		scanner.nextLine();
 		String newTheater = scanner.nextLine();
@@ -661,6 +670,10 @@ public class TheaterUI {
 	 * Checks whether the show exists
 	 */
 	public boolean removeShow() {
+		if(user.type.equalsIgnoreCase("guest") || user.type.equalsIgnoreCase("account")) {
+			System.out.println("Only managers can remove shows");
+			return false;
+		}
 		if(!checkShows()) {
 			return false;
 		}
@@ -684,6 +697,10 @@ public class TheaterUI {
 	 * Checks whether the refreshment already exists
 	 */
 	public boolean addRefreshment() {
+		if(user.type.equalsIgnoreCase("guest") || user.type.equalsIgnoreCase("account")) {
+			System.out.println("Only managers can add refreshments");
+			return false;
+		}
 		System.out.println("Enter the name of the refreshment to add");
 		scanner.nextLine();
 		String newRef = scanner.nextLine().toUpperCase();
@@ -713,6 +730,10 @@ public class TheaterUI {
 	 * Checks whether the refreshment exists
 	 */
 	public boolean removeRefreshment() {
+		if(user.type.equalsIgnoreCase("guest") || user.type.equalsIgnoreCase("account")) {
+			System.out.println("Only managers can remove refreshments");
+			return false;
+		}
 		if(!checkRefreshments()) {
 			return false;
 		}

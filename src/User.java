@@ -24,9 +24,9 @@ public class User {
 	 * @param name of user
 	 * @param type of user
 	 */
-	public User(String name, String type) {
+	public User(String name) {
 		this.name = name;
-		this.type = type;
+		type = "guest";
 		tickets = new ArrayList<Ticket>();
 		refreshments = new ArrayList<Refreshment>();
 	}

@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 class ManagerTest {
 
 	Theater theater = new Theater("Theater", 1);
-	Manager manager = new Manager("Manager", "Manager", "EmpID", 21, "Password", theater);
+	Manager manager = new Manager("Manager", "EmpID", 21, "Password", theater);
 	
 	@Test
 	public void testManagerConstructor() {
 		assertEquals("Manager", manager.name);
-		assertEquals("Manager", manager.type);
+		assertEquals("manager", manager.type);
 		assertEquals("EmpID", manager.empID);
 		assertEquals(21, manager.age);
 		assertEquals("Password", manager.password);

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class ReviewTest {
 
-	User author = new User("Author", "User");
+	User author = new User("Author");
 	Theater theater = new Theater("Theater", 1);
 	Show show = new Movie(theater, "Name", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 10, 10);
 	Review review = new Review(author, show, 5, "Review");
