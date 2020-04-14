@@ -9,6 +9,8 @@ class TheaterUITest {
 	Theater theater = new Theater("Theater", 1);
 	Show show = new Movie(theater, "Name", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 10, 10);
 	
+
+
 	@Test
 	public void testAddShowMovie() {
 		assertEquals(true, theaterUI.addShow());
@@ -134,5 +136,5 @@ class TheaterUITest {
 		Ticket[] tickets = null;
 		assertEquals(-1, theaterUI.loadTickets(tickets));
 	}
-
+	
 }
