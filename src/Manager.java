@@ -24,8 +24,9 @@ public class Manager extends User {
 	 * @param password of the manager
 	 * @param theater the manager works at
 	 */
-	public Manager(String name, String type, String empID, int age, String password, Theater theater) {
-		super(name, type);
+	public Manager(String name, String empID, int age, String password, Theater theater) {
+		super(name);
+		type = "manager";
 		this.empID = empID;
 		this.age = age;
 		this.password = password;

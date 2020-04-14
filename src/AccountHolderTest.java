@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 
 class AccountHolderTest {
 
-	AccountHolder account = new AccountHolder("AccountHolder", "Account", "Username", "Password", 21, "PaymentInfo", false, "Attribute");
-	AccountHolder teacher = new AccountHolder("Teacher", "Account", "Username", "Password", 21, "PaymentInfo", false, "Teacher");
-	AccountHolder military = new AccountHolder("Military", "Account", "Username", "Password", 21, "PaymentInfo", false, "Military");
-	AccountHolder student = new AccountHolder("Student", "Account", "Username", "Password", 21, "PaymentInfo", false, "Student");
-	AccountHolder retired = new AccountHolder("Retired", "Account", "Username", "Password", 21, "PaymentInfo", false, "Retired");
-	AccountHolder noDiscount = new AccountHolder("Teacher", "Account", "Username", "Password", 21, "PaymentInfo", false, "None");
+	AccountHolder account = new AccountHolder("AccountHolder", "Username", "Password", 21, "PaymentInfo", false, "Attribute");
+	AccountHolder teacher = new AccountHolder("Teacher", "Username", "Password", 21, "PaymentInfo", false, "Teacher");
+	AccountHolder military = new AccountHolder("Military", "Username", "Password", 21, "PaymentInfo", false, "Military");
+	AccountHolder student = new AccountHolder("Student", "Username", "Password", 21, "PaymentInfo", false, "Student");
+	AccountHolder retired = new AccountHolder("Retired", "Username", "Password", 21, "PaymentInfo", false, "Retired");
+	AccountHolder noDiscount = new AccountHolder("Teacher", "Username", "Password", 21, "PaymentInfo", false, "None");
 	
 	@Test
 	public void testAccountHolderConstructor() {
 		assertEquals("AccountHolder", account.name);
-		assertEquals("Account", account.type);
+		assertEquals("account", account.type);
 		assertEquals("Username", account.username);
 		assertEquals("Password", account.password);
 		assertEquals(21, account.age);

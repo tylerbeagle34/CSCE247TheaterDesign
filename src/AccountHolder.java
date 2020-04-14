@@ -29,8 +29,9 @@ public class AccountHolder extends User {
 	 * @param isHandicap; is the account holder handicap
 	 * @param attribute; special attributes of the account holder
 	 */
-	public AccountHolder(String name, String type, String username, String password, int age, String paymentInfo, boolean isHandicap, String attribute) {
-		super(name, type);
+	public AccountHolder(String name, String username, String password, int age, String paymentInfo, boolean isHandicap, String attribute) {
+		super(name);
+		type = "account";
 		this.username = username;
 		this.password = password;
 		this.age = age;

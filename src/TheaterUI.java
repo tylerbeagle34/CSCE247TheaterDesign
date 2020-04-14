@@ -27,11 +27,11 @@ public class TheaterUI {
 	private ArrayList<User> users;
 	private ArrayList<Manager> managers;
 	private ArrayList<AccountHolder> accounts;
-	private ArrayList<Theater> theaters;
+	protected ArrayList<Theater> theaters;
 	protected ArrayList<Show> shows;
-	private ArrayList<Movie> movies;
-	private ArrayList<Play> plays;
-	private ArrayList<Concert> concerts;
+	protected ArrayList<Movie> movies;
+	protected ArrayList<Play> plays;
+	protected ArrayList<Concert> concerts;
 	protected ArrayList<Refreshment> refreshments;
 	
 	/**
@@ -40,7 +40,7 @@ public class TheaterUI {
 	 */
 	public TheaterUI() {
 		scanner = new Scanner(System.in);
-		user = new User("Guest", "guest");
+		user = new User("Guest");
 		users = new ArrayList<User>();
 		managers = new ArrayList<Manager>();
 		accounts = new ArrayList<AccountHolder>();
@@ -69,11 +69,11 @@ public class TheaterUI {
 		shows.add(frozen2);
 		shows.add(jungleBook);
 		
-		AccountHolder existing = new AccountHolder("Exisiting User", "account", "existing", "existing", 21, "Cash", false, "student");
+		AccountHolder existing = new AccountHolder("Exisiting User", "existing", "existing", 21, "Cash", false, "student");
 		accounts.add(existing);
 		users.add(existing);
 		
-		Manager employee = new Manager("Playhouse Manager", "manager", "12345", 30, "manager", playsRUs);
+		Manager employee = new Manager("Playhouse Manager", "12345", 30, "manager", playsRUs);
 		managers.add(employee);
 		users.add(employee);
 	}
@@ -289,9 +289,10 @@ public class TheaterUI {
 	 * Checks to make sure the show exists
 	 * Allows users to purchase multiple tickets and choose options
 	 */
-	private void buyTickets() {
+	public boolean buyTickets() {
 		if(!checkShows()) {
-			return;
+			System.out.println("There are no shows");
+			return false;
 		}
 		System.out.println("Enter the name of the show you would like to buy tickets to");
 		printAllShows();
@@ -301,10 +302,14 @@ public class TheaterUI {
 			if(show.name.equalsIgnoreCase(input)) {
 				if(show.numTickets == 0) {
 					System.out.println("Sorry this show is sold out");
-					return;
+					return false;
 				}
 				System.out.println("How many tickets would you like?");
 				int numTix = scanner.nextInt();
+				if(numTix <= 0 || numTix > show.numTickets) {
+					System.out.println("Cannot purchase that amount of tickets");
+					return false;
+				}
 				Ticket[] tickets = new Ticket[numTix];
 				for(int i = 0; i < numTix; i++) {
 					boolean pickingSeat = true;
@@ -313,7 +318,7 @@ public class TheaterUI {
 						System.out.println("\nEnter the seat number you would like for TICKET " + (i + 1) + ". Those labeled zero have been sold");
 						show.printSeats();
 						seat = scanner.nextInt();
-						if(seat > show.rows * show.cols || seat == 0) {
+						if(seat > show.rows * show.cols || seat <= 0) {
 							System.out.println("That seat does not exist or has been sold");
 						}
 						else {
@@ -346,10 +351,11 @@ public class TheaterUI {
 						loadTickets(tickets);
 						break;
 				}
-				return;
+				return true;
 			}
 		}
 		System.out.println("Sorry we couldn't find that show");
+		return false;
 	}
 	
 	/**
@@ -540,7 +546,7 @@ public class TheaterUI {
 			System.out.println("Invalid attribute type. Defulted to none");
 			payment = "none";
 		}
-		AccountHolder newAccount = new AccountHolder(name, "account", username, password, age, payment, isHandicap, attribute);
+		AccountHolder newAccount = new AccountHolder(name, username, password, age, payment, isHandicap, attribute);
 		accounts.add(newAccount);
 		users.add(newAccount);
 		login();
@@ -591,9 +597,10 @@ public class TheaterUI {
 	/**
 	 * Logs users out if they are logged in
 	 */
-	private void logout() {
-		System.out.println(user.name+ " has logged out");
-		user = new User("Guest", "guest");
+	public boolean logout() {
+		System.out.println(user.name + " has logged out");
+		user = new User("Guest");
+		return true;
 	}
 	
 	/**
@@ -671,6 +678,7 @@ public class TheaterUI {
 		for(Show show : shows) {
 			if(show.name.equalsIgnoreCase(input)) {
 				shows.remove(show);
+				System.out.println(input.toUpperCase() + " was removed successfully");
 				return true;
 			}
 		}
