@@ -38,7 +38,7 @@ public class User {
 	 */
 	public User(Manager manager) {
 		this.name = manager.name;
-		this.type = manager.type;
+		type = "manager";
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class User {
 	 */
 	public User(AccountHolder account) {
 		this.name = account.name;
-		this.type = account.type;
+		type = "account";
 		tickets = new ArrayList<Ticket>();
 		refreshments = new ArrayList<Refreshment>();
 	}

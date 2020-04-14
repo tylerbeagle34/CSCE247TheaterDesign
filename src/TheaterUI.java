@@ -27,7 +27,7 @@ public class TheaterUI {
 	private ArrayList<User> users;
 	private ArrayList<Manager> managers;
 	private ArrayList<AccountHolder> accounts;
-	private ArrayList<Theater> theaters;
+	protected ArrayList<Theater> theaters;
 	protected ArrayList<Show> shows;
 	protected ArrayList<Movie> movies;
 	protected ArrayList<Play> plays;
@@ -289,9 +289,10 @@ public class TheaterUI {
 	 * Checks to make sure the show exists
 	 * Allows users to purchase multiple tickets and choose options
 	 */
-	private void buyTickets() {
+	public boolean buyTickets() {
 		if(!checkShows()) {
-			return;
+			System.out.println("There are no shows");
+			return false;
 		}
 		System.out.println("Enter the name of the show you would like to buy tickets to");
 		printAllShows();
@@ -301,10 +302,14 @@ public class TheaterUI {
 			if(show.name.equalsIgnoreCase(input)) {
 				if(show.numTickets == 0) {
 					System.out.println("Sorry this show is sold out");
-					return;
+					return false;
 				}
 				System.out.println("How many tickets would you like?");
 				int numTix = scanner.nextInt();
+				if(numTix <= 0 || numTix > show.numTickets) {
+					System.out.println("Cannot purchase that amount of tickets");
+					return false;
+				}
 				Ticket[] tickets = new Ticket[numTix];
 				for(int i = 0; i < numTix; i++) {
 					boolean pickingSeat = true;
@@ -313,7 +318,7 @@ public class TheaterUI {
 						System.out.println("\nEnter the seat number you would like for TICKET " + (i + 1) + ". Those labeled zero have been sold");
 						show.printSeats();
 						seat = scanner.nextInt();
-						if(seat > show.rows * show.cols || seat == 0) {
+						if(seat > show.rows * show.cols || seat <= 0) {
 							System.out.println("That seat does not exist or has been sold");
 						}
 						else {
@@ -346,10 +351,11 @@ public class TheaterUI {
 						loadTickets(tickets);
 						break;
 				}
-				return;
+				return true;
 			}
 		}
 		System.out.println("Sorry we couldn't find that show");
+		return false;
 	}
 	
 	/**
@@ -592,11 +598,7 @@ public class TheaterUI {
 	 * Logs users out if they are logged in
 	 */
 	public boolean logout() {
-		if(user.type.equalsIgnoreCase("guest")) {
-			System.out.println("You are not signed in");
-			return false;
-		}
-		System.out.println(user.name+ " has logged out");
+		System.out.println(user.name + " has logged out");
 		user = new User("Guest");
 		return true;
 	}
@@ -607,10 +609,6 @@ public class TheaterUI {
 	 * Creates a play, concert, or movie based on input show type
 	 */
 	public boolean addShow() {
-		if(user.type.equalsIgnoreCase("guest") || user.type.equalsIgnoreCase("account")) {
-			System.out.println("Only managers can add shows");
-			return false;
-		}
 		System.out.println("Enter the theater with this show");
 		scanner.nextLine();
 		String newTheater = scanner.nextLine();
@@ -670,10 +668,6 @@ public class TheaterUI {
 	 * Checks whether the show exists
 	 */
 	public boolean removeShow() {
-		if(user.type.equalsIgnoreCase("guest") || user.type.equalsIgnoreCase("account")) {
-			System.out.println("Only managers can remove shows");
-			return false;
-		}
 		if(!checkShows()) {
 			return false;
 		}
@@ -684,6 +678,7 @@ public class TheaterUI {
 		for(Show show : shows) {
 			if(show.name.equalsIgnoreCase(input)) {
 				shows.remove(show);
+				System.out.println(input.toUpperCase() + " was removed successfully");
 				return true;
 			}
 		}
@@ -697,10 +692,6 @@ public class TheaterUI {
 	 * Checks whether the refreshment already exists
 	 */
 	public boolean addRefreshment() {
-		if(user.type.equalsIgnoreCase("guest") || user.type.equalsIgnoreCase("account")) {
-			System.out.println("Only managers can add refreshments");
-			return false;
-		}
 		System.out.println("Enter the name of the refreshment to add");
 		scanner.nextLine();
 		String newRef = scanner.nextLine().toUpperCase();
@@ -730,10 +721,6 @@ public class TheaterUI {
 	 * Checks whether the refreshment exists
 	 */
 	public boolean removeRefreshment() {
-		if(user.type.equalsIgnoreCase("guest") || user.type.equalsIgnoreCase("account")) {
-			System.out.println("Only managers can remove refreshments");
-			return false;
-		}
 		if(!checkRefreshments()) {
 			return false;
 		}

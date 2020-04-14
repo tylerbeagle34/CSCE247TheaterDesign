@@ -5,65 +5,88 @@ import org.junit.jupiter.api.Test;
 class TheaterUITest {
 	
 	TheaterUI theaterUI = new TheaterUI();
-	User user = new User("User");
+	User user = new User("Guest");
 	Theater theater = new Theater("Theater", 1);
 	Show show = new Movie(theater, "Name", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 10, 10);
+	Manager manager = new Manager("Manager", "EmpID", 21, "Password", theater);
+	AccountHolder account = new AccountHolder("AccountHolder", "Username", "Password", 21, "PaymentInfo", false, "Attribute");
 	
 	@Test
-	public void testLogoutAccountHolder() {
+	public void testBuyTickets() {
+		theaterUI.shows.add(show);
+		assertEquals(true, theaterUI.buyTickets());
+	}
+	
+	@Test
+	public void testBuyTicketsSoldOut() {
+		Show soShow = new Movie(theater, "soName", "Description", "Genre", 5.00, 120.0, "PG", "1730", "Movie", 0, 0);
+		theaterUI.shows.add(soShow);
+		assertEquals(false, theaterUI.buyTickets());
+	}
+	
+	@Test
+	public void testBuyTicketsInvalidShow() {
+		theaterUI.shows.add(show);
+		assertEquals(false, theaterUI.buyTickets());
+	}
+	
+	@Test
+	public void testBuyTicketsInvalidTicketAmount() {
+		theaterUI.shows.add(show);
+		assertEquals(false, theaterUI.buyTickets());
+	}
+	
+	@Test
+	public void testBuyTicketsNoShows() {
+		for(Show show : theaterUI.shows) {
+			theaterUI.shows.remove(show);
+		}
+		assertEquals(false, theaterUI.buyTickets());
+	}
+	
+	@Test
+	public void testLogin() {
 		
 	}
 	
 	@Test
-	public void testLogoutManager() {
-		
+	public void testLogout() {
+		assertEquals(true, theaterUI.logout());
 	}
 	
 	@Test
 	public void testAddShowMovie() {
-		int showSize = theaterUI.shows.size();
-		int movieSize = theaterUI.movies.size();
+		theaterUI.theaters.add(theater);
 		assertEquals(true, theaterUI.addShow());
-		assertEquals(showSize + 1, theater.shows.size());
-		assertEquals(movieSize + 1, theater.movies.size());
-		assertNotNull(theater.shows);
-		assertNotNull(theater.movies);
 	}
 	
 	@Test
 	public void testAddShowPlay() {
-		int showSize = theaterUI.shows.size();
-		int playSize = theaterUI.plays.size();
+		theaterUI.theaters.add(theater);
 		assertEquals(true, theaterUI.addShow());
-		assertEquals(showSize + 1, theater.plays.size());
-		assertEquals(playSize + 1, theater.plays.size());
-		assertNotNull(theater.shows);
-		assertNotNull(theater.plays);
 	}
 	
 	@Test
 	public void testAddShowConcert() {
-		int showSize = theaterUI.shows.size();
-		int concertSize = theaterUI.concerts.size();
+		theaterUI.theaters.add(theater);
 		assertEquals(true, theaterUI.addShow());
-		assertEquals(showSize + 1, theater.shows.size());
-		assertEquals(concertSize + 1, theater.concerts.size());
-		assertNotNull(theater.shows);
-		assertNotNull(theater.concerts);
 	}
 	
 	@Test
 	public void testAddShowInvalidType() {
+		theaterUI.theaters.add(theater);
 		assertEquals(false, theaterUI.addShow());
 	}
 	
 	@Test
 	public void testAddShowInvalidTheater() {
+		theaterUI.theaters.add(theater);
 		assertEquals(false, theaterUI.addShow());
 	}
 	
 	@Test
 	public void testAddShowPriceLessThanZero() {
+		theaterUI.theaters.add(theater);
 		assertEquals(false, theaterUI.addShow());
 	}
 	
